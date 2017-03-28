@@ -1,0 +1,2 @@
+
+COLLECTION = "news_site"
