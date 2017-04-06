@@ -4,19 +4,24 @@
     <h1>Headlines
     </h1>
 </div>
-<div class="panel panel-default">
-    {% for headline in headlines if headline.read_status == False %}
-    <!--<div class="panel panel-default" href="{{ headline.link }}" role="button">-->
-        <!--<a href="{{ headline.link }}" target="_blank">-->
-            <a class="panel panel-default" href="{{ headline.link }}" role="button" target="_blank">{{ headline.name }}</a>
-            <a class="btn btn-default" href="{{ url_for('headlines.deactivate_headline', headline_id=headline._id) }}" role="button">deactivate</a>
-            <div></div>
-            <!--<h4 class="list-group-item-title">{{ headline.read_status }}</h4>-->
-        <!--</a>-->
-    <!--</div>-->
 
-    {% endfor %}
+
+
+{% for headline in headlines if headline.read_status == False %}
+
+<div class="table table-striped">
+
+    <a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_headline', headline_id=headline._id) }}"
+       role="button">remove</a>
+
+
+    <a class="col-md-4" href="{{ headline.link }}" role="button" target="_blank">{{ headline.name }}</a>
+
 </div>
 
+{% endfor %}
+
+
 {% endblock %}
+<div class="page-header"></div>
 
