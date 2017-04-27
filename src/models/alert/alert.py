@@ -12,7 +12,7 @@ Database.initialize()
 class Alert(object):
 
     @staticmethod
-    def load_news(url, tag_name, query, query2, relave_link):
+    def load_news(url, tag_name, query, query2, relave_link, revision):
         request = requests.get(url)
         content = request.content
         soup = BeautifulSoup(content, "html.parser")
@@ -26,15 +26,15 @@ class Alert(object):
                 if not 'http' in href:
                     href = relave_link+href
                 headline = elem.text.strip()
-                Headlines(headline, href).save_to_mongo()
+                Headlines(headline, href, revision).save_to_mongo()
 
     @staticmethod
     def get_news_site():
         return News.get_all()
 
     @staticmethod
-    def get_all_headlines(all_news):
+    def get_all_headlines(all_news, revision):
         for elem in all_news:
-            Alert.load_news(url=elem.url, tag_name=elem.tag_name, query=elem.query, query2=elem.query2, relave_link=elem.relative_link)
+            Alert.load_news(url=elem.url, tag_name=elem.tag_name, query=elem.query, query2=elem.query2, relave_link=elem.relative_link, revision=revision)
 
 

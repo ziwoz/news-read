@@ -29,3 +29,9 @@ class Database(object):
     @staticmethod
     def update(collection, query, data):
         Database.DATABASE[collection].update(query, data, upsert=True)
+
+    @staticmethod
+    def find_highest_one(collection, data):
+        return Database.DATABASE[collection].find_one(sort=[(data, pymongo.DESCENDING)])
+
+

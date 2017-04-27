@@ -4,11 +4,12 @@ from src.common.database import Database
 import src.models.headlines.constant as HeadlinesConstants
 
 class Headlines(object):
-    def __init__(self, name, link, read_status = False, _id = None):
+    def __init__(self, name, link, revision, read_status = False, _id = None):
         self.name = name
         self.link = link
         self.read_status = read_status
         self._id = uuid.uuid4().hex if _id is None else _id
+        self.revision = revision
 
     def __repr__(self):
         return "<headline:{}>".format(self.name)
@@ -18,7 +19,8 @@ class Headlines(object):
             "name": self.name,
             "link": self.link,
             "read_status": self.read_status,
-            "_id": self._id
+            "_id": self._id,
+            "revision": self.revision
 
         }
 
@@ -44,9 +46,27 @@ class Headlines(object):
         Database.update(HeadlinesConstants.COLLECTION, {'_id': self._id}, self.json())
 
     def deactivate(self):
-        print('reached the headlines.py')
+        # print('reached the headlines.py')
         self.read_status = True
         self.update()
+
+
+    @staticmethod
+    def get_highest_revision():
+        return Database.find_highest_one(HeadlinesConstants.COLLECTION, 'revision')['revision']
+
+
+
+    @classmethod
+    def find_all_by_rev(cls, rev):
+        return [cls(**elem) for elem in Database.find(HeadlinesConstants.COLLECTION, {'revision': {'$lte':rev}})]
+
+    @staticmethod
+    def deactivate_all_by_rev(rev):
+        headlines = Headlines.find_all_by_rev(rev)
+        for headline in headlines:
+            headline.deactivate()
+
 
 
 
