@@ -4,7 +4,7 @@ from src.common.database import Database
 import src.models.headlines.constant as HeadlinesConstants
 
 class Headlines(object):
-    def __init__(self, name, link, revision, read_status = False, _id = None):
+    def __init__(self, name, link, revision=0, read_status = False, _id = None):
         self.name = name
         self.link = link
         self.read_status = read_status
@@ -53,7 +53,10 @@ class Headlines(object):
 
     @staticmethod
     def get_highest_revision():
-        return Database.find_highest_one(HeadlinesConstants.COLLECTION, 'revision')['revision']
+        try:
+            return Database.find_highest_one(HeadlinesConstants.COLLECTION, 'revision')['revision']
+        except KeyError:
+            return 0
 
 
 
