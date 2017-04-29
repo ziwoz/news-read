@@ -3,14 +3,14 @@
 <div class="page-header">
     <h1>Headlines
     </h1>
-    <a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove_all</a>
+    <a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove</a>
 </div>
 
 
 
 {% for headline in headlines if headline.read_status == False %}
 
-<div class="table table-striped">
+<div class="chemmu">
 
     <a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_headline', headline_id=headline._id) }}"
        role="button">remove</a>
