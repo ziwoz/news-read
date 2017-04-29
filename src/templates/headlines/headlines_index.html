@@ -1,22 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="page-header">
-    <h1>Headlines
-    </h1>
-    <a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove</a>
+<div class="news_heading">
+    <div class="news_chapter">
+    <h1>Headlines</h1>
+    </div>
+    <div class="news_delete_all">
+    <a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove All</a>
+    </div>
 </div>
 
 
 
 {% for headline in headlines if headline.read_status == False %}
 
-<div class="chemmu">
+<div class="news_box">
 
+    <div class="del_button">
     <a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_headline', headline_id=headline._id) }}"
        role="button">remove</a>
+    </div>
 
-
+    <div class="headline">
     <a class="col-md-6" href="{{ headline.link }}" role="button" target="_blank">{{ headline.name }}</a>
+    </div>
 
 </div>
 
