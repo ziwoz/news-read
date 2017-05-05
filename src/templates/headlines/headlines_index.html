@@ -27,6 +27,7 @@
 </div>
 
 {% endfor %}
+<a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove All</a>
 
 
 {% endblock %}
