@@ -4,9 +4,9 @@
     <div class="news_chapter">
     <h1>Headlines</h1>
     </div>
-    <div class="news_delete_all">
-    <a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove All</a>
-    </div>
+    <!--<div class="news_delete_all">-->
+    <!--<a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove All</a>-->
+    <!--</div>-->
 </div>
 
 
@@ -27,8 +27,9 @@
 </div>
 
 {% endfor %}
-<a class="btn btn-danger btn-sm" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove All</a>
-
+<div class="news_box">
+<a class="btn btn-danger btn-sm news_delete_all" href="{{ url_for('headlines.deactivate_all_read', rev=rev) }}">Remove All</a>
+</div>
 
 {% endblock %}
 <div class="page-header"></div>
