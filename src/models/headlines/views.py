@@ -2,11 +2,16 @@ from flask import Blueprint, render_template, redirect, url_for
 
 from src.models.headlines.headlines import Headlines
 headlines_blueprint = Blueprint('headlines', __name__)
+import src.models.headlines.constant as HeadlinesConstants
 
 
 @headlines_blueprint.route("/")
 def index():
     headlines = Headlines.get_all()
+    # for headline in headlines:
+    #     if 'No Talks' in headline.name:
+    #         print(headline.name)
+    #         headlines.remove(headline)
     # get the headlines revision number
     try:
         # try is added to avoid the TypeError when the DB is empty
@@ -14,6 +19,12 @@ def index():
     except TypeError:
         rev = None
     # print(rev)
+    for headline in headlines:
+        for elem in HeadlinesConstants.rm_list:
+            if elem in headline.name:
+                headlines.remove(headline)
+
+
     return render_template('headlines/headlines_index.html', headlines=headlines, rev=rev)
 
 

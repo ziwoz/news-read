@@ -28,6 +28,8 @@ class Headlines(object):
     def get_all(cls):
         return [cls(**elem) for elem in Database.find(HeadlinesConstants.COLLECTION, {})]
 
+
+
     def save_to_mongo(self):
         check_already_exist = Database.find_one(HeadlinesConstants.COLLECTION, {"link": self.link})
         if not check_already_exist:
