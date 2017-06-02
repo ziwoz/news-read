@@ -19,10 +19,10 @@ def index():
     except TypeError:
         rev = None
     # print(rev)
-    for headline in headlines:
-        for elem in HeadlinesConstants.rm_list:
-            if elem in headline.name:
-                headlines.remove(headline)
+    # for headline in headlines:
+    #     for elem in HeadlinesConstants.rm_list:
+    #         if elem in headline.name:
+    #             headlines.remove(headline)
 
 
     return render_template('headlines/headlines_index.html', headlines=headlines, rev=rev)
