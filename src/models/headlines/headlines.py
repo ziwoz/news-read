@@ -65,6 +65,8 @@ class Headlines(object):
     @classmethod
     def find_all_by_rev(cls, rev):
         return [cls(**elem) for elem in Database.find(HeadlinesConstants.COLLECTION, {'revision': {'$lte':rev}})]
+        # raw_news = [cls(**elem) for elem in Database.find(HeadlinesConstants.COLLECTION, {'revision': {'$lte': rev}})]
+        # news = [x for x in raw_news if y not in ]
 
     @staticmethod
     def deactivate_all_by_rev(rev):

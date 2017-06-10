@@ -8,28 +8,30 @@ import src.models.headlines.constant as HeadlinesConstants
 @headlines_blueprint.route("/")
 def index():
     headlines = Headlines.get_all()
-    # for headline in headlines:
-    #     if 'No Talks' in headline.name:
-    #         print(headline.name)
-    #         headlines.remove(headline)
-    # get the headlines revision number
     try:
         # try is added to avoid the TypeError when the DB is empty
         rev = Headlines.get_highest_revision()
     except TypeError:
         rev = None
-    # print(rev)
+    headlines_clean = []
+    # keeping a copy of healines list to remove the keyword filtered ones
+
     for headline in headlines:
-        for elem in HeadlinesConstants.rm_list:
+        elements = HeadlinesConstants.rm_list
+        rem = False
+
+        for elem in elements:
             if elem in str(headline.name):
-                # print(headline.name)
                 try:
-                    headlines.remove(headline)
-                except ValueError:
+                    rem = True
+                    break
+
+                except ValueError as e:
                     continue
+        if not rem:
+            headlines_clean.append(headline)
 
-
-    return render_template('headlines/headlines_index.html', headlines=headlines, rev=rev)
+    return render_template('headlines/headlines_index.html', headlines=headlines_clean, rev=rev)
 
 
 @headlines_blueprint.route('/deactivate/<string:headline_id>')
@@ -40,7 +42,6 @@ def deactivate_headline(headline_id):
 
 @headlines_blueprint.route('/remove_all/<int:rev>')
 def deactivate_all_read(rev):
-    # print('the revision is {}'.format(rev))
     Headlines.deactivate_all_by_rev(rev)
     return redirect(url_for(".index"))
 

@@ -9,6 +9,5 @@ rm_list = ['trump', 'Trump',' cow ', 'Cow ', 'COW ', 'cow ','Pak',
            'Adityanath', 'ആദിത്യനാഥ്', 'Rajnath', 'രാജ്നാഥ് സിങ്', 'Cow',
            'അമിത് ഷാ', 'ട്രംപ്','കശാപ്പ്', 'പാക്കി', 'Pakistan', 'Molesting', 'ആർഎസ്എ',
            'ബിജെപി', 'RSS', 'BJP', 'Qatar', 'Jihadi', 'terror', 'കൊന്നു', 'Kabul',
-            'കാബുള', 'പീഡ', 'God', 'ഖത്ത']
-
-rm_list1 = []
+            'കാബുള', 'പീഡ', 'God', 'ഖത്ത', 'Pak', 'ബീഫി', 'Amit Shah', 'പശു'
+           'പാക്ക്']
