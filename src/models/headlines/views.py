@@ -21,7 +21,7 @@ def index():
     # print(rev)
     for headline in headlines:
         for elem in HeadlinesConstants.rm_list:
-            if elem in headline.name:
+            if elem in str(headline.name):
                 # print(headline.name)
                 try:
                     headlines.remove(headline)
